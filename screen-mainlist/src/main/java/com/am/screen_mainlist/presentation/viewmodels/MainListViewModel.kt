@@ -37,6 +37,9 @@ class MainListViewModel (
                 when (it) {
                     is NetworkResult.Success -> {
                         addDbUseCase.addAllItems(it.data?.courses ?: emptyList())
+                        getLocalUseCase.invoke().collect {
+                            _mainList.value = it
+                        }
                         Log.d("myLog", "${it.data?.courses?.size}")
                     }
 
@@ -70,10 +73,17 @@ class MainListViewModel (
     }
 
     fun addToFavourites (item : CourseDBO) {
-        val favItem = item.copy(hasLike = true)
+        val favItem = item.copy(hasLike = !item.hasLike)
         viewModelScope.launch {
             addDbUseCase.addToFavourite(favItem)
             Log.d("myLog", "$favItem")
+        }
+    }
+
+    fun removeFromFavourites (item: CourseDBO) {
+        val notFavItem = item.copy(hasLike = false)
+        viewModelScope.launch {
+            addDbUseCase.addToFavourite(notFavItem)
         }
     }
 
