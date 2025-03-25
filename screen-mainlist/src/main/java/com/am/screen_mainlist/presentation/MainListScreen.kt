@@ -1,6 +1,8 @@
 package com.am.screen_mainlist.presentation
 
+import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -52,6 +54,8 @@ fun MainListScreen (viewModel: MainListViewModel, navController: NavController) 
 
     var searchQuery by remember { mutableStateOf("") }
 
+    var sorted by remember { mutableStateOf(false) }
+
     fun onClickFav (item : CourseDBO) {
         viewModel.addToFavourites(item)
     }
@@ -63,9 +67,22 @@ fun MainListScreen (viewModel: MainListViewModel, navController: NavController) 
                 item.text.contains(delayedQuery, ignoreCase = true)
     }
 
+    val filteredListState = remember { mutableStateOf(filteredList) }
+
     LaunchedEffect(searchQuery) {
         delay(200)
         delayedQuery = searchQuery
+    }
+
+    LaunchedEffect (sorted) {
+        Log.d("myLog", "launchedeffect")
+        if (sorted) {
+            filteredListState.value = filteredList.sortedBy { it.id }
+            Log.d("myLog", "${filteredListState.value[1]}")
+        } else {
+            filteredListState.value = filteredList.sortedByDescending { it.startDate }
+            Log.d("myLog", "${filteredListState.value[1]}")
+        }
     }
 
     Scaffold (bottomBar = { BottomNavigation(navController) }) { padding ->
@@ -83,7 +100,9 @@ fun MainListScreen (viewModel: MainListViewModel, navController: NavController) 
                     placeholder = { Text("Search...") }
                 )
 
-                Image(
+                Image(modifier = Modifier.clickable {
+                    sorted = if (sorted) false else true
+                },
                     painter = painterResource(R.drawable.sort),
                     contentDescription = "sort"
                 )
@@ -110,7 +129,7 @@ fun MainListScreen (viewModel: MainListViewModel, navController: NavController) 
             }
             else {
                 LazyColumn {
-                    itemsIndexed(filteredList) {index, item ->
+                    itemsIndexed(filteredListState.value) {index, item ->
                         ListItem(item, {onClickFav(item)})
                     }
                 }

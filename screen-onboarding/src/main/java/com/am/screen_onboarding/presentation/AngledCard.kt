@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -38,7 +40,7 @@ fun AngledCard(
 
     val randomDirection = Random.nextBoolean()
 
-    Card(
+    Card (
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onClick)
@@ -46,10 +48,15 @@ fun AngledCard(
                 rotationZ = if (isTilted) {
                     if (randomDirection) targetRotation else -targetRotation
                 } else 0.0f
-            },
-        colors = if (isTilted) CardDefaults.cardColors(androidx.compose.ui.graphics.Color.Green) else
-            CardDefaults.cardColors(androidx.compose.ui.graphics.Color.DarkGray),
-        shape = CircleShape
+            }
+            .shadow(20.dp,
+                CircleShape),
+        colors = if (isTilted) CardDefaults.cardColors(MaterialTheme.colorScheme.primary) else
+            CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary),
+        shape = CircleShape,
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 10.dp
+        )
     ) {
         Box(
             modifier = Modifier

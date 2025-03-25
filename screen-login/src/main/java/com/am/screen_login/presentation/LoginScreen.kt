@@ -1,6 +1,8 @@
 package com.am.screen_login.presentation
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -16,8 +18,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -66,21 +70,24 @@ fun LoginScreen(navController: NavController) {
 
                     Text(
                         text = "Вход",
-                        fontSize = 30.sp
+                        fontSize = 30.sp,
+                        color = MaterialTheme.colorScheme.secondary
                     )
 
                     Spacer(modifier = Modifier.height(15.dp))
 
                     Text(
                         text = "Email",
-                        fontSize = 20.sp
+                        fontSize = 20.sp,
+                        color = MaterialTheme.colorScheme.secondary
                     )
 
                     BaseTextField("example@gmail.com", emailInput)
 
                     Text(
                         text = "Пароль",
-                        fontSize = 20.sp
+                        fontSize = 20.sp,
+                        color = MaterialTheme.colorScheme.secondary
                     )
 
                     BaseTextField("Введите пароль", passwordInput)
@@ -116,7 +123,8 @@ fun LoginScreen(navController: NavController) {
                     }
 
                     Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-                        Text("Нету аккаунта?")
+                        Text("Нету аккаунта?",
+                            color = MaterialTheme.colorScheme.secondary)
                         Text("Регистрация",
                             color = Color.Green,
                             modifier = Modifier.clickable {
@@ -139,10 +147,14 @@ fun LoginScreen(navController: NavController) {
                         horizontalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
                         Button(
-                            onClick = {},
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://vk.com"))
+                                context.startActivity(intent)
+                            },
                             modifier = Modifier
                                 .weight(1f)
-                                .height(50.dp)
+                                .height(50.dp),
+                            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onBackground)
                         ) {
                             Image(
                                 painterResource(R.drawable.vk),
@@ -152,10 +164,14 @@ fun LoginScreen(navController: NavController) {
                         }
 
                         Button(
-                            onClick = {},
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://ok.com"))
+                                context.startActivity(intent)
+                            },
                             modifier = Modifier
                                 .weight(1f)
-                                .height(50.dp)
+                                .height(50.dp),
+                            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onSurface)
                         ) {
                             Image(
                                 painterResource(R.drawable.ok),

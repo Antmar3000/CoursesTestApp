@@ -21,6 +21,7 @@ import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -40,13 +41,13 @@ fun ListItem  (item : CourseDBO, onClickFav : () -> Unit) {
 
     Card (modifier = Modifier.fillMaxWidth()
         .padding(16.dp),
-        colors = CardDefaults.cardColors(Color.DarkGray),
+        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary),
         shape = RoundedCornerShape(15.dp)
     ){
         Column (modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.Start) {
             Card (modifier = Modifier.fillMaxWidth()
-                .height(120.dp),
+                .height(160.dp),
                 shape = RoundedCornerShape(15.dp)) {
 
                 Box(modifier = Modifier.fillMaxWidth()) {
@@ -106,19 +107,24 @@ fun ListItem  (item : CourseDBO, onClickFav : () -> Unit) {
                     verticalArrangement = Arrangement.spacedBy(10.dp)) {
 
                     Text(item.title,
-                        fontSize = 20.sp)
+                        fontSize = 20.sp,
+                        color = MaterialTheme.colorScheme.secondary)
 
                     Text(item.text,
                         maxLines = 2,
-                        overflow = TextOverflow.Ellipsis)
+                        overflow = TextOverflow.Ellipsis,
+                        color = Color.White.copy(0.8f))
 
                     Row (modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically) {
-                        Text(item.price)
+
+                        Text(item.price,
+                            color = MaterialTheme.colorScheme.secondary)
 
                         Row (verticalAlignment = Alignment.CenterVertically) {
-                            Text("podrobnee")
+                            Text("podrobnee",
+                                color = MaterialTheme.colorScheme.primary)
                             Image(Icons.Default.MoreVert, "arrow")
                         }
                     }

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults.indicatorLine
 import androidx.compose.runtime.Composable
@@ -37,7 +38,7 @@ fun BaseTextField(text : String, input : MutableState<String>) {
                 .height(50.dp)
                 .fillMaxWidth()
                 .align(Alignment.Center)
-                .background(color = Color.Black,
+                .background(color = MaterialTheme.colorScheme.tertiary,
                     shape = CircleShape),
             textStyle = LocalTextStyle.current.copy(
                 color = Color.White,
