@@ -71,9 +71,8 @@ class MainListViewModel(
     }
 
     fun updateFavourite(item: CourseDBO) {
-        val favItem = item.copy(hasLike = !item.hasLike)
         viewModelScope.launch {
-            addDbUseCase.updateFavourite(favItem)
+            addDbUseCase.updateFavourite(item)
         }
     }
 }

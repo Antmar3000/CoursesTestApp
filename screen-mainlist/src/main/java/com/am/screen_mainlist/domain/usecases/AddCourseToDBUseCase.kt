@@ -12,6 +12,7 @@ class AddCourseToDBUseCase (
     }
 
     suspend fun updateFavourite (item : CourseDBO) {
-        repository.updateFavourites(item)
+        val favItem = item.copy(hasLike = !item.hasLike)
+        repository.updateFavourites(favItem)
     }
 }

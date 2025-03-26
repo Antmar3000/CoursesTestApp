@@ -57,7 +57,7 @@ fun SuccessScreen(viewModel: MainListViewModel) {
 
     var delayedQuery by remember { mutableStateOf("") }
 
-    val filteredList = if (sorted) {
+    val filteredList = if (!sorted) {
         list.filter { item ->
             item.title.contains(delayedQuery, ignoreCase = true) ||
                     item.text.contains(delayedQuery, ignoreCase = true)
