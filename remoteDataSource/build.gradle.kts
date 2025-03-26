@@ -1,12 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlin.ksp)
 }
 
 android {
-    namespace = "com.am.screen_mainlist"
+    namespace = "com.am.remotedatasource"
     compileSdk = 35
 
     defaultConfig {
@@ -37,8 +35,6 @@ android {
 dependencies {
 
     implementation(project(":core"))
-    implementation(project(":remoteDataSource"))
-    implementation(project(":localDataSource"))
 
     //retrofit
     implementation(libs.retrofit)
@@ -51,27 +47,10 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.navigation)
 
-    //room
-    implementation(libs.room.ktx)
-    implementation(libs.room.runtime)
-    ksp(libs.room.compiler)
-
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.ui.tooling)
-
 }

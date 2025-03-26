@@ -1,7 +1,7 @@
 package com.am.screen_mainlist.domain.usecases
 
 import com.am.core.domain.entity.Course
-import com.am.screen_mainlist.data.database.models.CourseDBO
+import com.am.localdatasource.data.database.models.CourseDBO
 import com.am.screen_mainlist.domain.repository.LocalRepository
 
 class AddCourseToDBUseCase (

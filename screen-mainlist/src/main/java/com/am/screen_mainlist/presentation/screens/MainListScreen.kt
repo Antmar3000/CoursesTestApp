@@ -12,7 +12,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.am.core.presentation.NavRoutes
-import com.am.screen_mainlist.data.utils.NetworkResult
 import com.am.screen_mainlist.presentation.navigation.BottomNavigation
 import com.am.screen_mainlist.presentation.screens.states.ErrorScreen
 import com.am.screen_mainlist.presentation.screens.states.LoadingScreen

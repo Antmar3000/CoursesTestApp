@@ -1,4 +1,4 @@
-package com.am.screen_mainlist.data.api
+package com.am.remotedatasource.data.api
 
 class RemoteDataSource (
     private val api : ApiService

@@ -1,7 +1,7 @@
 package com.am.screen_mainlist.data.repository
 
-import com.am.screen_mainlist.data.api.RemoteDataSource
-import com.am.screen_mainlist.data.api.models.CoursesResponse
+import com.am.remotedatasource.data.api.RemoteDataSource
+import com.am.remotedatasource.data.api.models.CoursesResponse
 import com.am.screen_mainlist.data.utils.NetworkResult
 import com.am.screen_mainlist.data.utils.SafeApiResponse
 import com.am.screen_mainlist.domain.repository.RemoteRepository

@@ -2,7 +2,7 @@ package com.am.screen_mainlist.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.am.screen_mainlist.data.database.models.CourseDBO
+import com.am.localdatasource.data.database.models.CourseDBO
 import com.am.screen_mainlist.data.utils.NetworkResult
 import com.am.screen_mainlist.domain.usecases.AddCourseToDBUseCase
 import com.am.screen_mainlist.domain.usecases.GetLocalCourseFavListUseCase

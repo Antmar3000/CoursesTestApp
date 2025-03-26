@@ -1,4 +1,4 @@
-package com.am.screen_mainlist.data.api.models
+package com.am.remotedatasource.data.api.models
 
 import com.am.core.domain.entity.Course
 

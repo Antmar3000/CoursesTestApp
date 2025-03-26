@@ -1,4 +1,4 @@
-package com.am.screen_mainlist.data.api
+package com.am.remotedatasource.data.api
 
 import android.content.Context
 import okhttp3.Interceptor

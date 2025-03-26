@@ -1,8 +1,8 @@
 package com.am.screen_mainlist.data.repository
 
 import com.am.core.domain.entity.Course
-import com.am.screen_mainlist.data.database.LocalDAO
-import com.am.screen_mainlist.data.database.models.CourseDBO
+import com.am.localdatasource.data.database.LocalDAO
+import com.am.localdatasource.data.database.models.CourseDBO
 import com.am.screen_mainlist.domain.repository.LocalRepository
 import kotlinx.coroutines.flow.Flow
 

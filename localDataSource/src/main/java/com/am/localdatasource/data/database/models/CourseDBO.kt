@@ -1,4 +1,4 @@
-package com.am.screen_mainlist.data.database.models
+package com.am.localdatasource.data.database.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

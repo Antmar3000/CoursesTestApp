@@ -1,6 +1,6 @@
-package com.am.screen_mainlist.data.api
+package com.am.remotedatasource.data.api
 
-import com.am.screen_mainlist.data.api.models.CoursesResponse
+import com.am.remotedatasource.data.api.models.CoursesResponse
 import retrofit2.Response
 import retrofit2.http.GET
 

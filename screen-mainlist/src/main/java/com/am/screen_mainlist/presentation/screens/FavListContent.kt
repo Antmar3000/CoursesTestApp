@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.am.screen_mainlist.data.database.models.CourseDBO
+import com.am.localdatasource.data.database.models.CourseDBO
 import com.am.screen_mainlist.presentation.utils.ListItem
 import com.am.screen_mainlist.presentation.viewmodels.MainListViewModel
 

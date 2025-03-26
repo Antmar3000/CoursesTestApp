@@ -1,11 +1,11 @@
-package com.am.screen_mainlist.data.database
+package com.am.localdatasource.data.database
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.am.screen_mainlist.data.database.models.CourseDBO
+import com.am.localdatasource.data.database.models.CourseDBO
 import kotlinx.coroutines.flow.Flow
 
 @Dao

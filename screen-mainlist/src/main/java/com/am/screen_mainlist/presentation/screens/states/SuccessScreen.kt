@@ -37,7 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.am.screen_mainlist.R
-import com.am.screen_mainlist.data.database.models.CourseDBO
+import com.am.localdatasource.data.database.models.CourseDBO
 import com.am.screen_mainlist.presentation.utils.ListItem
 import com.am.screen_mainlist.presentation.viewmodels.MainListViewModel
 import kotlinx.coroutines.delay
