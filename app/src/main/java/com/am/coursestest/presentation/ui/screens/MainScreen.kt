@@ -8,8 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.am.core.presentation.NavRoutes
 import com.am.coursestest.data.IsFirstLaunched
 import com.am.screen_login.presentation.LoginScreen
-import com.am.screen_mainlist.presentation.FavListScreen
-import com.am.screen_mainlist.presentation.MainListScreen
+import com.am.screen_mainlist.presentation.screens.MainListScreen
 import com.am.screen_mainlist.presentation.viewmodels.MainListViewModel
 import com.am.screen_onboarding.presentation.OnboardingScreen
 import org.koin.androidx.compose.KoinAndroidContext
@@ -32,7 +31,7 @@ fun MainScreen(viewModel: MainListViewModel,
     KoinAndroidContext {
         NavHost(
             navController = navController,
-            startDestination = NavRoutes.ONBOARDING
+            startDestination = startDestination
         ) {
 
             composable(NavRoutes.ONBOARDING) {
@@ -44,17 +43,8 @@ fun MainScreen(viewModel: MainListViewModel,
             }
 
             composable(NavRoutes.MAIN_LIST) {
-                MainListScreen(viewModel, navController)
+                MainListScreen(viewModel)
             }
-
-            composable(NavRoutes.FAV_LIST) {
-                FavListScreen(viewModel, navController)
-            }
-
-            composable(NavRoutes.ACCOUNT) {
-                AccountMockScreen(navController)
-            }
-
         }
     }
 }

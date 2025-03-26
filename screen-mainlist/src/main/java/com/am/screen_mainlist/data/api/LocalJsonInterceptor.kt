@@ -1,7 +1,6 @@
 package com.am.screen_mainlist.data.api
 
 import android.content.Context
-import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.Protocol

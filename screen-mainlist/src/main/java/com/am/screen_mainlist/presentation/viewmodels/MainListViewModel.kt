@@ -1,24 +1,23 @@
 package com.am.screen_mainlist.presentation.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.am.core.domain.entity.Course
 import com.am.screen_mainlist.data.database.models.CourseDBO
 import com.am.screen_mainlist.data.utils.NetworkResult
 import com.am.screen_mainlist.domain.usecases.AddCourseToDBUseCase
 import com.am.screen_mainlist.domain.usecases.GetLocalCourseFavListUseCase
 import com.am.screen_mainlist.domain.usecases.GetLocalCourseListUseCase
 import com.am.screen_mainlist.domain.usecases.GetRemoteCourseListUseCase
+import com.am.screen_mainlist.presentation.utils.ScreenStates
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class MainListViewModel (
-    private val getRemoteUseCase : GetRemoteCourseListUseCase,
-    private val getFavUseCase : GetLocalCourseFavListUseCase,
-    private val addDbUseCase : AddCourseToDBUseCase,
-    private val getLocalUseCase : GetLocalCourseListUseCase
+class MainListViewModel(
+    private val getRemoteUseCase: GetRemoteCourseListUseCase,
+    private val getFavUseCase: GetLocalCourseFavListUseCase,
+    private val addDbUseCase: AddCourseToDBUseCase,
+    private val getLocalUseCase: GetLocalCourseListUseCase
 ) : ViewModel() {
 
     private val _mainList = MutableStateFlow<List<CourseDBO>>(emptyList())
@@ -27,67 +26,54 @@ class MainListViewModel (
     private val _favouritesList = MutableStateFlow<List<CourseDBO>>(emptyList())
     val favouritesList get() = _favouritesList.asStateFlow()
 
+    private val _screenState = MutableStateFlow<ScreenStates>(ScreenStates.Loading)
+    val screenState get() = _screenState.asStateFlow()
+
     init {
         loadData()
     }
 
     private fun loadData() {
         viewModelScope.launch {
-            getRemoteUseCase.invoke().let {
-                when (it) {
+            getRemoteUseCase.invoke().let { networkResult ->
+                when (networkResult) {
                     is NetworkResult.Success -> {
-                        addDbUseCase.addAllItems(it.data?.courses ?: emptyList())
-                        getLocalUseCase.invoke().collect {
-                            _mainList.value = it
-                        }
-                        Log.d("myLog", "${it.data?.courses?.size}")
+                        _screenState.value = ScreenStates.Success
+                        addDbUseCase.addAllItems(networkResult.data?.courses ?: emptyList())
+                        getAllList()
+                        getFavList()
                     }
 
                     is NetworkResult.Error -> {
-                        Log.d("myLog", "error")
+                        _screenState.value = ScreenStates.Error(networkResult.message)
                     }
 
                     is NetworkResult.Loading -> {
-                        Log.d("myLog", "loading")
+                        _screenState.value = ScreenStates.Loading
                     }
                 }
             }
         }
     }
 
-    fun getAllList () {
+    private fun getAllList() {
         viewModelScope.launch {
             getLocalUseCase.invoke()
-                .collect { _mainList.value = it
-                    Log.d("myLog", mainList.value.size.toString())}
-
+                .collect { _mainList.value = it }
         }
     }
 
-    fun getFavList () {
+    private fun getFavList() {
         viewModelScope.launch {
             getFavUseCase.invoke()
-                .collect { _favouritesList.value = it
-                Log.d("myLog", favouritesList.value.size.toString())}
+                .collect { _favouritesList.value = it }
         }
     }
 
-    fun addToFavourites (item : CourseDBO) {
+    fun updateFavourite(item: CourseDBO) {
         val favItem = item.copy(hasLike = !item.hasLike)
         viewModelScope.launch {
-            addDbUseCase.addToFavourite(favItem)
-            Log.d("myLog", "$favItem")
+            addDbUseCase.updateFavourite(favItem)
         }
-    }
-
-    fun removeFromFavourites (item: CourseDBO) {
-        val notFavItem = item.copy(hasLike = false)
-        viewModelScope.launch {
-            addDbUseCase.addToFavourite(notFavItem)
-        }
-    }
-
-    fun filter() {
-
     }
 }

@@ -1,6 +1,5 @@
 package com.am.screen_onboarding.presentation
 
-import android.util.Log
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,10 +14,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Button
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,7 +46,6 @@ fun OnboardingScreen(navController: NavController) {
     }
     val listItemsNew: List<List<GridItem>> = listItems
 
-
     fun setTinted(id: Int, id2: Int, isTinted: Boolean) {
         val updatedList = listItems[id].map {
             if (it.id == id2) it.copy(isTinted = !isTinted) else it
@@ -55,63 +53,68 @@ fun OnboardingScreen(navController: NavController) {
         listItems[id] = updatedList.toMutableList()
     }
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
+    Scaffold { padding ->
 
-        Spacer(modifier = Modifier.height(100.dp))
-
-        Text(
-            "Тысячи курсов \nв одном месте",
-            fontSize = 24.sp,
-            color = Color.White,
-            lineHeight = 30.sp
-        )
-
-        Box(
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 30.dp)
+                .fillMaxSize()
+                .padding(padding),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            Column(
+            Spacer(modifier = Modifier.height(100.dp))
+
+            Text(
+                "Тысячи курсов \nв одном месте",
+                fontSize = 24.sp,
+                color = Color.White,
+                lineHeight = 30.sp
+            )
+
+            Box(
                 modifier = Modifier
-                    .horizontalScroll(scrollState)
+                    .fillMaxWidth()
+                    .padding(vertical = 30.dp)
             ) {
-                listItemsNew.forEach { rowItems ->
-                    FlowRow(
-                        modifier = Modifier.padding(vertical = 4.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    ) {
-                        rowItems.forEach { item ->
-                            AngledCard(
-                                item,
-                                item.isTinted,
-                                {
-                                    setTinted(
-                                        listItemsNew.indexOf(rowItems),
-                                        item.id,
-                                        item.isTinted
-                                    )
-                                })
+
+                Column(
+                    modifier = Modifier
+                        .horizontalScroll(scrollState)
+                ) {
+                    listItemsNew.forEach { rowItems ->
+                        FlowRow(
+                            modifier = Modifier.padding(vertical = 4.dp),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        ) {
+                            rowItems.forEach { item ->
+                                AngledCard(
+                                    item,
+                                    item.isTinted,
+                                    {
+                                        setTinted(
+                                            listItemsNew.indexOf(rowItems),
+                                            item.id,
+                                            item.isTinted
+                                        )
+                                    })
+                            }
                         }
                     }
                 }
             }
-        }
 
-        Box(
-            modifier = Modifier.fillMaxHeight(),
-            contentAlignment = Alignment.BottomCenter
-        ) {
-            Button(
-                onClick = { navController.navigate(NavRoutes.LOGIN) },
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxWidth()
+            Box(
+                modifier = Modifier.fillMaxHeight(),
+                contentAlignment = Alignment.BottomCenter
             ) {
-                Text("Продолжить")
+                Button(
+                    onClick = { navController.navigate(NavRoutes.LOGIN) },
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxWidth()
+                ) {
+                    Text("Продолжить")
+                }
             }
         }
     }

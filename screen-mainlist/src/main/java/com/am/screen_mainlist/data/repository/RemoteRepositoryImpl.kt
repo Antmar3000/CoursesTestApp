@@ -1,6 +1,5 @@
 package com.am.screen_mainlist.data.repository
 
-import com.am.core.domain.entity.Course
 import com.am.screen_mainlist.data.api.RemoteDataSource
 import com.am.screen_mainlist.data.api.models.CoursesResponse
 import com.am.screen_mainlist.data.utils.NetworkResult

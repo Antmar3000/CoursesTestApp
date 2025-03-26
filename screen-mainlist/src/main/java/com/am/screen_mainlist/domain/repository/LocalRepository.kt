@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocalRepository {
 
-    suspend fun addToFavourites(item: CourseDBO)
+    suspend fun updateFavourites(item: CourseDBO)
 
     suspend fun addAll (list : List<Course>)
 

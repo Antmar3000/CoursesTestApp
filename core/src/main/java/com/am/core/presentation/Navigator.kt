@@ -10,4 +10,5 @@ object NavRoutes {
     const val FAV_LIST = "favlist"
     const val ACCOUNT = "account"
     const val ONBOARDING = "onboarding"
+    const val MAIN_LIST_CONTENT = "mainlist_content"
 }

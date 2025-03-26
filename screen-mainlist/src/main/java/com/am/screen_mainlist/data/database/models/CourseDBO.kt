@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.am.core.domain.entity.Course
 
 @Entity(tableName = "local_courses",
     indices = [Index(value = ["course_id"], unique = true)])
@@ -17,5 +16,5 @@ data class CourseDBO (
     val rate : Float,
     val startDate : String,
     val hasLike : Boolean,
-    val publishDate : String
+    val publishDate : String,
 )

@@ -79,7 +79,3 @@ private fun provideOkHttpClient(interceptor: Interceptor): OkHttpClient {
         .addInterceptor(interceptor)
         .build()
 }
-
-private fun provideDatabase (context: Context) {
-
-}
