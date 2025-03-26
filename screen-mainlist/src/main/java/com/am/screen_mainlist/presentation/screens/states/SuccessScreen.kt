@@ -146,7 +146,8 @@ fun SuccessScreen(viewModel: MainListViewModel) {
                     modifier = Modifier
                         .size(24.dp),
                     painter = painterResource(R.drawable.sort_icon),
-                    tint = MaterialTheme.colorScheme.secondary,
+                    tint = if (delayedQuery.isNotEmpty()) MaterialTheme.colorScheme.primary
+                    else MaterialTheme.colorScheme.secondary,
                     contentDescription = "sort"
                 )
             }

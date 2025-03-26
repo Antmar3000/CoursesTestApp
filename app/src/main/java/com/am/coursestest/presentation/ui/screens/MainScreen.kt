@@ -42,7 +42,7 @@ fun MainScreen(viewModel: MainListViewModel,
                 LoginScreen(navController)
             }
 
-            composable(NavRoutes.MAIN_LIST) {
+            composable(NavRoutes.MAIN_SCREEN) {
                 MainListScreen(viewModel)
             }
         }

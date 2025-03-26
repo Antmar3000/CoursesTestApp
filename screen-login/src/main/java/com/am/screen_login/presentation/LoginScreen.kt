@@ -41,6 +41,10 @@ fun LoginScreen(navController: NavController) {
 
     val context = LocalContext.current
 
+    fun makeToast(text : String) {
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+    }
+
     val emailInput = remember { mutableStateOf("") }
     val passwordInput = remember { mutableStateOf("") }
 
@@ -111,10 +115,10 @@ fun LoginScreen(navController: NavController) {
                                     onClickLogin(emailInput.value, context, navController)
                                 }
                                 else {
-                                    Toast.makeText(context, "Кириллица недоступна для поля email", Toast.LENGTH_SHORT).show()
+                                    makeToast("Кириллица недоступна для поля email")
                                 }
                             } else {
-                                Toast.makeText(context, "Заполните поля входа", Toast.LENGTH_SHORT).show()
+                                makeToast("Заполните поля входа")
                             }
                         }) {
                         Text("Вход")
@@ -128,14 +132,14 @@ fun LoginScreen(navController: NavController) {
                         Text("Регистрация",
                             color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.clickable {
-                                Toast.makeText(context, "Регистрация", Toast.LENGTH_SHORT).show()
+                                makeToast("Регистрация")
                             })
                     }
 
                     Text("Забыл пароль",
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.clickable {
-                            Toast.makeText(context, "Забыл пароль", Toast.LENGTH_SHORT).show()
+                            makeToast("Забыл пароль")
                         })
 
                     Spacer(modifier = Modifier.height(10.dp))
@@ -186,11 +190,12 @@ fun LoginScreen(navController: NavController) {
     }
 }
 
+
 fun onClickLogin (inputEmail : String,
                   context: Context,
                   navController: NavController) {
     if (inputEmail.matches("^[a-zA-Z0-9+_.-]+@[a-z]+\\.+[a-z]+".toRegex())) {
-        navController.navigate(NavRoutes.MAIN_LIST)
+        navController.navigate(NavRoutes.MAIN_SCREEN)
     } else {
         Toast.makeText(context, "Email введён неправильно", Toast.LENGTH_SHORT).show()
     }
